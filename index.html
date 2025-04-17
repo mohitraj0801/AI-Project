@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agricultural AI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #e8f5e9, #e0f7fa);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      transition: background 0.3s;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2e7d32;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .logo i {
+      color: #66bb6a;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background-color: #c8e6c9;
+      padding: 1.5rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      background-color: #a5d6a7;
+      border-color: #66bb6a;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card i {
+      font-size: 1.8rem;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      margin: 0.3rem 0;
+      font-size: 1.2rem;
+      color: #1b5e20;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .dark-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.2rem;
+    }
+
+    /* Dark Mode Styles */
+    .dark-mode {
+      background: #121212;
+      color: #fff;
+    }
+
+    .dark-mode .container {
+      background: #1e1e1e;
+    }
+
+    .dark-mode .card {
+      background: #37474f;
+      border-color: transparent;
+    }
+
+    .dark-mode .card:hover {
+      background: #455a64;
+      border-color: #4caf50;
+    }
+
+    .dark-mode .logo {
+      color: #a5d6a7;
+    }
+
+    .dark-mode .card h3 {
+      color: #c8e6c9;
+    }
+
+    .dark-mode .card p {
+      color: #e0f2f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dark-toggle">
+    <label>
+      <input type="checkbox" id="darkModeSwitch"> 🌙
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <i class="fas fa-seedling"></i> Agricultural AI Assistant
+    </div>
+    <div class="subtitle">Select an option below to proceed</div>
+
+    <div class="card" onclick="location.href='crop_rotation.html'">
+      <i class="fas fa-sync-alt"></i>
+      <h3>Crop Rotation Recommendation</h3>
+      <p>Get AI-powered suggestions for sustainable crop planning.</p>
+    </div>
+
+    <div class="card" onclick="location.href='irrigation.html'">
+      <i class="fas fa-tint"></i>
+      <h3>Irrigation Prediction</h3>
+      <p>Predict water needs with intelligent irrigation planning.</p>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('darkModeSwitch');
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crop Rotation Recommendation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #e8f5e9, #e0f7fa);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background: #f1f8e9;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>🌱 Crop Rotation Recommendation</h2>
+
+    <select id="previousCrop">
+      <option value="Groundnut">Groundnut</option>
+      <option value="Millets">Millets</option>
+      <option value="Wheat">Wheat</option>
+      <option value="Maize">Maize</option>
+      <option value="Cotton">Cotton</option>
+      <option value="Sorghum">Sorghum</option>
+      <option value="Barley">Barley</option>
+    </select>
+
+    <select id="soilType">
+      <option value="Loamy">Loamy</option>
+      <option value="Clayey">Clayey</option>
+      <option value="Sandy">Sandy</option>
+      <option value="Saline">Saline</option>
+    </select>
+
+    <input type="number" id="moistureLevel" placeholder="Moisture Level (%)" />
+    <input type="number" id="nitrogen" placeholder="Nitrogen (N)" />
+    <input type="number" id="phosphorus" placeholder="Phosphorus (P)" />
+    <input type="number" id="potassium" placeholder="Potassium (K)" />
+
+    <button onclick="predictCrop()">Recommend Crop</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function predictCrop() {
+      const data = {
+        "Previous Crop": document.getElementById("previousCrop").value,
+        "Soil Type": document.getElementById("soilType").value,
+        "Moisture Level": parseFloat(document.getElementById("moistureLevel").value),
+        "Nitrogen (N)": parseFloat(document.getElementById("nitrogen").value),
+        "Phosphorus (P)": parseFloat(document.getElementById("phosphorus").value),
+        "Potassium (K)": parseFloat(document.getElementById("potassium").value)
+      };
+
+      fetch("http://127.0.0.1:5000/crop_recommendation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result["Recommended Crop"]) {
+          document.getElementById("result").innerText = "🌾 Recommended Crop: " + result["Recommended Crop"];
+        } else {
+          document.getElementById("result").innerText = "No recommendation available.";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("result").innerText = "An error occurred.";
+      });
+    }
+  </script>
+</body>
+</html>
