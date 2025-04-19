@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template
 from flask_cors import CORS
 import pandas as pd
 import numpy as np
@@ -27,6 +27,11 @@ crop_mapping = {
     1: 'Wheat', 2: 'Rice', 3: 'Millets', 4: 'Cotton',
     5: 'Groundnut', 6: 'Maize', 7: 'Sorghum', 8: 'Barley',
 }
+
+# --- Route: Serve Index HTML ---
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 # --- Route: Predict Irrigation Type ---
 @app.route("/predict", methods=["POST"])
@@ -89,10 +94,9 @@ def crop_recommendation():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# --- Run the combined app ---
+# --- Run the app ---
 import os
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))  # Default to 10000 if PORT not set
     app.run(host="0.0.0.0", port=port, debug=True)
-
