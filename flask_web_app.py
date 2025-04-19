@@ -29,12 +29,6 @@ crop_mapping = {
 }
 
 # --- Route: Serve Index HTML ---
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-from flask import render_template
-
 @app.route('/')
 def index():
     return render_template('index.html', bg_image='bg.jpg')
