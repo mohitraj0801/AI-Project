@@ -33,6 +33,20 @@ crop_mapping = {
 def index():
     return render_template("index.html")
 
+from flask import render_template
+
+@app.route('/')
+def index():
+    return render_template('index.html', bg_image='bg.jpg')
+
+@app.route('/crop_rotation')
+def crop_rotation():
+    return render_template('crop_rotation.html', bg_image='bg2.jpg')
+
+@app.route('/irrigation')
+def irrigation():
+    return render_template('irrigation.html', bg_image='bg3.jpg')
+
 # --- Route: Predict Irrigation Type ---
 @app.route("/predict", methods=["POST"])
 def predict_irrigation():

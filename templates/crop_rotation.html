@@ -14,7 +14,7 @@
     }
 
     body {
-    background: url('bg2.jpg') no-repeat center center fixed;
+    background: url("{{ url_for('static', filename=bg_image) }}") no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     display: flex;
